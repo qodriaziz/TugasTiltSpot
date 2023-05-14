@@ -53,12 +53,11 @@ public class MainActivity extends AppCompatActivity
     // System sensor manager instance.
     private SensorManager mSensorManager;
 
-    // Accelerometer and magnetometer sensors, as retrieved from the
-    // sensor manager.
+    // Sensor akselerometer dan magnetometer, sebagaimana diambil dari sensor manager.
     private Sensor mSensorAccelerometer;
     private Sensor mSensorMagnetometer;
 
-    // Current data from accelerometer & magnetometer.  The arrays hold values
+    // Data ini dari akselerometer dan magnetometer. The arrays hold values
     // for X, Y, and Z.
     private float[] mAccelerometerData = new float[3];
     private float[] mMagnetometerData = new float[3];
@@ -68,13 +67,13 @@ public class MainActivity extends AppCompatActivity
     private TextView mTextSensorPitch;
     private TextView mTextSensorRoll;
 
-    // ImageView drawables to display spots.
+    // ImageView drawables untuk menampilkan spot.
     private ImageView mSpotTop;
     private ImageView mSpotBottom;
     private ImageView mSpotLeft;
     private ImageView mSpotRight;
 
-    // System display. Need this for determining rotation.
+    //sistem display. diperlukan untuk menentukan rotasi.
     private Display mDisplay;
 
     //menambahkan deklarasi label
@@ -82,9 +81,9 @@ public class MainActivity extends AppCompatActivity
     private TextView label2;
     private TextView label3;
 
-    // Very small values for the accelerometer (on all three axes) should
-    // be interpreted as 0. This value is the amount of acceptable
-    // non-zero drift.
+    //Nilai yang sangat kecil untuk akselerometer (pada ketiga sumbu) seharusnya
+    // diartikan sebagai 0. Nilai ini adalah jumlah yang dapat diterima
+    // drift bukan nol.
     private static final float VALUE_DRIFT = 0.05f;
 
     @Override
@@ -160,9 +159,9 @@ public class MainActivity extends AppCompatActivity
 
 
 
-        // Get accelerometer and magnetometer sensors from the sensor manager.
-        // The getDefaultSensor() method returns null if the sensor
-        // is not available on the device.
+        // mendapatkan sensor akselerometer dan magnetometer dari pengelola sensor.
+        // Metode getDefaultSensor() mengembalikan nol jika sensor
+        // tidak tersedia di perangkat.
         mSensorManager = (SensorManager) getSystemService(
                 Context.SENSOR_SERVICE);
         mSensorAccelerometer = mSensorManager.getDefaultSensor(
@@ -170,12 +169,13 @@ public class MainActivity extends AppCompatActivity
         mSensorMagnetometer = mSensorManager.getDefaultSensor(
                 Sensor.TYPE_MAGNETIC_FIELD);
 
-        // Get the display from the window manager (for rotation).
+
+        // menampilkan tampilan dari window manager untuk rotasi layar
         WindowManager wm = (WindowManager) getSystemService(WINDOW_SERVICE);
         mDisplay = wm.getDefaultDisplay();
     }
-    //method readFile
 
+    //method readFile
     private String readFIle() {
         File fileEvents = new File(MainActivity.this.getFilesDir() + "/text/sample");
         StringBuilder text = new StringBuilder();
@@ -282,8 +282,8 @@ public class MainActivity extends AppCompatActivity
                 break;
         }
 
-        // Get the orientation of the device (azimuth, pitch, roll) based
-        // on the rotation matrix. Output units are radians.
+        //meng get orientasi perangkat (azimuth, pitch, roll) berdasarkan
+        // pada matriks rotasi. Satuan output adalah radian.
         float orientationValues[] = new float[3];
         if (rotationOK) {
             SensorManager.getOrientation(rotationMatrixAdjusted,
@@ -295,9 +295,9 @@ public class MainActivity extends AppCompatActivity
         float pitch = orientationValues[1];
         float roll = orientationValues[2];
 
-        // Pitch and roll values that are close to but not 0 cause the
-        // animation to flash a lot. Adjust pitch and roll to 0 for very
-        // small values (as defined by VALUE_DRIFT).
+        // Nilai pitch and roll yang mendekati 0 tetapi tidak menyebabkan
+        // animasi untuk mem-flash banyak. Sesuaikan pitch and roll ke 0 untuk very
+        // nilai kecil (sebagaimana didefinisikan oleh VALUE_DRIFT).
         if (Math.abs(pitch) < VALUE_DRIFT) {
             pitch = 0;
         }
