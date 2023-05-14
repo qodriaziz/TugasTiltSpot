@@ -27,11 +27,28 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Display;
 import android.view.Surface;
 import android.view.WindowManager;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+//import yang ditambahkan
+import android.view.View;
+import android.widget.Button;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import android.widget.Toast;
+import android.os.Environment;
+
 
 public class MainActivity extends AppCompatActivity
         implements SensorEventListener {
+
+    //button deklarasi save
+    Button save;
 
     // System sensor manager instance.
     private SensorManager mSensorManager;
@@ -70,6 +87,35 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //yang ditambahkan
+        final TextView output = findViewById(R.id.output);
+        final EditText EnterText = findViewById(R.id.edit_text);
+        save = findViewById(R.id.bsave);
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!EnterText.getText().toString().isEmpty()) {
+                    File file = new File(MainActivity.this.getFilesDir(), "text");
+                    if (!file.exists()) {
+                        file.mkdir();
+                    }
+                    try {
+                        File gpxfile = new File(file, "sample");
+                        FileWriter writer = new FileWriter(gpxfile);
+                        writer.append(EnterText.getText().toString());
+                        writer.flush();
+                        writer.close();
+                        output.setText(readFIle());
+                        Toast.makeText(MainActivity.this, "Saved your text", Toast.LENGTH_LONG).show();
+
+                    } catch (Exception e) {
+
+                    }
+                }
+            }
+        });
+
+
         mTextSensorAzimuth = (TextView) findViewById(R.id.value_azimuth);
         mTextSensorPitch = (TextView) findViewById(R.id.value_pitch);
         mTextSensorRoll = (TextView) findViewById(R.id.value_roll);
@@ -92,6 +138,30 @@ public class MainActivity extends AppCompatActivity
         WindowManager wm = (WindowManager) getSystemService(WINDOW_SERVICE);
         mDisplay = wm.getDefaultDisplay();
     }
+    //method readFile
+
+    private String readFIle() {
+        File fileEvents = new File(MainActivity.this.getFilesDir() + "/text/sample");
+        StringBuilder text = new StringBuilder();
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(fileEvents));
+            String line;
+            while ((line = br.readLine()) != null) {
+                text.append(line);
+                text.append(' ');
+            }
+            br.close();
+        } catch (IOException e) { }
+            String result = text.toString();
+            return result;
+        }
+
+
+
+
+
+
+
 
     /**
      * Listeners for the sensors are registered in this callback so that

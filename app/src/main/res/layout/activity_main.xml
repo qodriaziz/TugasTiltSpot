@@ -159,7 +159,6 @@ limitations under the License. -->
         android:layout_width="109dp"
         android:layout_height="50dp"
         android:drawableStart="@drawable/baseline_add_circle_24"
-        android:onClick="tambah"
         android:text="tambah"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.947"
@@ -170,8 +169,8 @@ limitations under the License. -->
 
     <TextView
         android:id="@+id/output"
-        android:layout_width="415dp"
-        android:layout_height="49dp"
+        android:layout_width="222dp"
+        android:layout_height="53dp"
         android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
         tools:layout_editor_absoluteY="179dp" />
