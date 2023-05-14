@@ -100,7 +100,7 @@ public class MainActivity extends AppCompatActivity
         mTextSensorAzimuth = (TextView) findViewById(R.id.value_azimuth);
         label2 = (TextView) findViewById(R.id.label_pitch);
         mTextSensorPitch = (TextView) findViewById(R.id.value_pitch);
-        label3 = (TextView) findViewById(R.id.value_roll);
+        label3 = (TextView) findViewById(R.id.label_roll);
         mTextSensorRoll = (TextView) findViewById(R.id.value_roll);
         mSpotTop = (ImageView) findViewById(R.id.spot_top);
         mSpotBottom = (ImageView) findViewById(R.id.spot_bottom);
@@ -141,12 +141,12 @@ public class MainActivity extends AppCompatActivity
                 try{
                     File gpxfile = new File(file, "sample");
                         FileWriter writer = new FileWriter(gpxfile);
-                         writer.append(label1.getText().toString());
-                         writer.append(mTextSensorAzimuth.getText().toString());
-                         writer.append(label2.getText().toString());
-                         writer.append(mTextSensorPitch.getText().toString());
-                         writer.append(label3.getText().toString());
-                         writer.append(mTextSensorRoll.getText().toString());
+                         writer.append(label1.getText().toString() + "\t");
+                         writer.append(mTextSensorAzimuth.getText().toString() + "\n");
+                         writer.append(label2.getText().toString() +"\t ");
+                         writer.append(mTextSensorPitch.getText().toString() +"\n");
+                         writer.append(label3.getText().toString() + "\t");
+                         writer.append(mTextSensorRoll.getText().toString()+ "\n");
                          writer.flush();
                          writer.close();
 
