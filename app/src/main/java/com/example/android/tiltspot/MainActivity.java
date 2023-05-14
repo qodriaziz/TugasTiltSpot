@@ -77,6 +77,11 @@ public class MainActivity extends AppCompatActivity
     // System display. Need this for determining rotation.
     private Display mDisplay;
 
+    //menambahkan deklarasi label
+    private TextView label1;
+    private TextView label2;
+    private TextView label3;
+
     // Very small values for the accelerometer (on all three axes) should
     // be interpreted as 0. This value is the amount of acceptable
     // non-zero drift.
@@ -88,41 +93,72 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
 
         //yang ditambahkan
-        final TextView output = findViewById(R.id.output);
-        final EditText EnterText = findViewById(R.id.edit_text);
+        //final TextView output = findViewById(R.id.output);
+        //final EditText EnterText = findViewById(R.id.edit_text);
         save = findViewById(R.id.bsave);
-        save.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (!EnterText.getText().toString().isEmpty()) {
-                    File file = new File(MainActivity.this.getFilesDir(), "text");
-                    if (!file.exists()) {
-                        file.mkdir();
-                    }
-                    try {
-                        File gpxfile = new File(file, "sample");
-                        FileWriter writer = new FileWriter(gpxfile);
-                        writer.append(EnterText.getText().toString());
-                        writer.flush();
-                        writer.close();
-                        output.setText(readFIle());
-                        Toast.makeText(MainActivity.this, "Saved your text", Toast.LENGTH_LONG).show();
-
-                    } catch (Exception e) {
-
-                    }
-                }
-            }
-        });
-
-
+        label1 = (TextView) findViewById(R.id.label_azimuth);
         mTextSensorAzimuth = (TextView) findViewById(R.id.value_azimuth);
+        label2 = (TextView) findViewById(R.id.label_pitch);
         mTextSensorPitch = (TextView) findViewById(R.id.value_pitch);
+        label3 = (TextView) findViewById(R.id.value_roll);
         mTextSensorRoll = (TextView) findViewById(R.id.value_roll);
         mSpotTop = (ImageView) findViewById(R.id.spot_top);
         mSpotBottom = (ImageView) findViewById(R.id.spot_bottom);
         mSpotLeft = (ImageView) findViewById(R.id.spot_left);
         mSpotRight = (ImageView) findViewById(R.id.spot_right);
+
+        //save.setOnClickListener(new View.OnClickListener() {
+            //@Override
+            //public void onClick(View view) {
+                //if (!EnterText.getText().toString().isEmpty()) {
+                    //File file = new File(MainActivity.this.getFilesDir(), "text");
+                    //if (!file.exists()) {
+                    //    file.mkdir();
+                    //}
+                    //try {
+                    //    File gpxfile = new File(file, "sample");
+                    //    FileWriter writer = new FileWriter(gpxfile);
+                   //     writer.append(EnterText.getText().toString());
+                    //    writer.flush();
+                    //    writer.close();
+                    //    output.setText(readFIle());
+                    //    Toast.makeText(MainActivity.this, "Saved your text", Toast.LENGTH_LONG).show();
+
+                    // } catch (Exception e) {
+
+                    //}
+                //}
+            //}
+        //});
+
+        //button save dan method
+        save.setOnClickListener((view)-> {
+            if (!mTextSensorAzimuth.getText().toString().isEmpty()) {
+                File file = new File(MainActivity.this.getFilesDir(), "text");
+                if (!file.exists()) {
+                   file.mkdir();
+                }
+                try{
+                    File gpxfile = new File(file, "sample");
+                        FileWriter writer = new FileWriter(gpxfile);
+                         writer.append(label1.getText().toString());
+                         writer.append(mTextSensorAzimuth.getText().toString());
+                         writer.append(label2.getText().toString());
+                         writer.append(mTextSensorPitch.getText().toString());
+                         writer.append(label3.getText().toString());
+                         writer.append(mTextSensorRoll.getText().toString());
+                         writer.flush();
+                         writer.close();
+
+                        Toast.makeText(MainActivity.this, "Saved your text", Toast.LENGTH_LONG).show();
+                }catch (Exception e){
+
+                }
+            }
+        });
+
+
+
 
         // Get accelerometer and magnetometer sensors from the sensor manager.
         // The getDefaultSensor() method returns null if the sensor
