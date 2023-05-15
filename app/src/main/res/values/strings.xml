@@ -12,12 +12,12 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License. -->
 <resources>
-    <string name="app_name">TiltSpot</string>
+    <string name="app_name">Tugas TiltSpot</string>
 
     <!-- Text view labels for orientation data -->
-    <string name="label_azimuth_string">Azmiuth:</string>
-    <string name="label_pitch_string">Pitch:</string>
-    <string name="label_roll_string">Roll:</string>
+    <string name="label_azimuth_string">Azimuth :</string>
+    <string name="label_pitch_string">Pitch  :</string>
+    <string name="label_roll_string">Roll  :</string>
 
     <!-- String for the orientation values. The %1$.2f part is a placeholder
      that will be filled in at runtime:
