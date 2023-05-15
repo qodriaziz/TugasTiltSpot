@@ -149,7 +149,7 @@ public class MainActivity extends AppCompatActivity
                          writer.flush();
                          writer.close();
 
-                        Toast.makeText(MainActivity.this, "Saved your text", Toast.LENGTH_LONG).show();
+                        Toast.makeText(MainActivity.this, "menyimpan data azimuth, pitch dan roll", Toast.LENGTH_LONG).show();
                 }catch (Exception e){
 
                 }
